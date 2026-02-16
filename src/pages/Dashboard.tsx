@@ -421,11 +421,14 @@ function TeilnehmerDialog({
 
   useEffect(() => {
     if (open) {
+      // Handle array or string for angemeldete_kurse
+      const kurseRaw = teilnehmer?.fields.angemeldete_kurse;
+      const kurseValue = Array.isArray(kurseRaw) ? kurseRaw[0] ?? '' : kurseRaw ?? '';
       setFormData({
         teilnehmer_vorname: teilnehmer?.fields.teilnehmer_vorname ?? '',
         teilnehmer_nachname: teilnehmer?.fields.teilnehmer_nachname ?? '',
         teilnehmer_email: teilnehmer?.fields.teilnehmer_email ?? '',
-        angemeldete_kurse: teilnehmer?.fields.angemeldete_kurse ?? '',
+        angemeldete_kurse: kurseValue,
       });
     }
   }, [open, teilnehmer]);
@@ -569,11 +572,14 @@ function KursleiterDialog({
 
   useEffect(() => {
     if (open) {
+      // Handle array or string for zugewiesener_kurs
+      const kursRaw = kursleiter?.fields.zugewiesener_kurs;
+      const kursValue = Array.isArray(kursRaw) ? kursRaw[0] ?? '' : kursRaw ?? '';
       setFormData({
         kursleiter_vorname: kursleiter?.fields.kursleiter_vorname ?? '',
         kursleiter_nachname: kursleiter?.fields.kursleiter_nachname ?? '',
         kursleiter_kontakt: kursleiter?.fields.kursleiter_kontakt ?? '',
-        zugewiesener_kurs: kursleiter?.fields.zugewiesener_kurs ?? '',
+        zugewiesener_kurs: kursValue,
       });
     }
   }, [open, kursleiter]);
@@ -814,7 +820,11 @@ export default function Dashboard() {
   const instructorByCourseId = useMemo(() => {
     const map = new Map<string, Kursleiterzuordnung>();
     kursleiter.forEach((kl) => {
-      const courseId = extractRecordId(kl.fields.zugewiesener_kurs);
+      const courseUrlRaw = kl.fields.zugewiesener_kurs;
+      // Handle both array and string formats from API
+      const courseUrl = Array.isArray(courseUrlRaw) ? courseUrlRaw[0] : courseUrlRaw;
+      if (typeof courseUrl !== 'string') return;
+      const courseId = extractRecordId(courseUrl);
       if (courseId) map.set(courseId, kl);
     });
     return map;
@@ -824,11 +834,19 @@ export default function Dashboard() {
   const participantsByCourseId = useMemo(() => {
     const map = new Map<string, Teilnehmeranmeldung[]>();
     teilnehmer.forEach((t) => {
-      const courseUrl = t.fields.angemeldete_kurse;
-      if (!courseUrl) return;
-      // multipleapplookup could be comma-separated or a single URL
-      const urls = courseUrl.includes(',') ? courseUrl.split(',').map((u) => u.trim()) : [courseUrl];
+      const courseUrlRaw = t.fields.angemeldete_kurse;
+      if (!courseUrlRaw) return;
+      // Handle both array and string formats from API
+      let urls: string[];
+      if (Array.isArray(courseUrlRaw)) {
+        urls = courseUrlRaw;
+      } else if (typeof courseUrlRaw === 'string') {
+        urls = courseUrlRaw.includes(',') ? courseUrlRaw.split(',').map((u) => u.trim()) : [courseUrlRaw];
+      } else {
+        return;
+      }
       urls.forEach((url) => {
+        if (typeof url !== 'string') return;
         const courseId = extractRecordId(url);
         if (!courseId) return;
         if (!map.has(courseId)) map.set(courseId, []);
@@ -886,9 +904,12 @@ export default function Dashboard() {
     );
   }
 
-  // Get course name from a URL
-  function getCourseNameFromUrl(url: string | undefined): string {
-    if (!url) return '—';
+  // Get course name from a URL (handles both string and array)
+  function getCourseNameFromUrl(urlRaw: string | string[] | undefined): string {
+    if (!urlRaw) return '—';
+    // Handle both array and string formats from API
+    const url = Array.isArray(urlRaw) ? urlRaw[0] : urlRaw;
+    if (typeof url !== 'string') return '—';
     const id = extractRecordId(url);
     if (!id) return '—';
     const k = kursMap.get(id);
@@ -897,11 +918,20 @@ export default function Dashboard() {
 
   // Resolve participant's courses
   function getParticipantCourseNames(t: Teilnehmeranmeldung): string[] {
-    const courseUrl = t.fields.angemeldete_kurse;
-    if (!courseUrl) return [];
-    const urls = courseUrl.includes(',') ? courseUrl.split(',').map((u) => u.trim()) : [courseUrl];
+    const courseUrlRaw = t.fields.angemeldete_kurse;
+    if (!courseUrlRaw) return [];
+    // Handle both array and string formats from API
+    let urls: string[];
+    if (Array.isArray(courseUrlRaw)) {
+      urls = courseUrlRaw;
+    } else if (typeof courseUrlRaw === 'string') {
+      urls = courseUrlRaw.includes(',') ? courseUrlRaw.split(',').map((u) => u.trim()) : [courseUrlRaw];
+    } else {
+      return [];
+    }
     return urls
       .map((url) => {
+        if (typeof url !== 'string') return null;
         const id = extractRecordId(url);
         if (!id) return null;
         return kursMap.get(id)?.fields.kurs_name ?? null;

@@ -8,7 +8,7 @@ export interface Teilnehmeranmeldung {
     teilnehmer_vorname?: string;
     teilnehmer_nachname?: string;
     teilnehmer_email?: string;
-    angemeldete_kurse?: string;
+    angemeldete_kurse?: string | string[]; // API may return array or comma-separated string
   };
 }
 
@@ -20,7 +20,7 @@ export interface Kursleiterzuordnung {
     kursleiter_vorname?: string;
     kursleiter_nachname?: string;
     kursleiter_kontakt?: string;
-    zugewiesener_kurs?: string; // applookup -> URL zu 'Kursverwaltung' Record
+    zugewiesener_kurs?: string | string[]; // applookup -> URL zu 'Kursverwaltung' Record (may be array)
   };
 }
 
