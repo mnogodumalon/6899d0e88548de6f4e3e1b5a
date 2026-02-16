@@ -1,0 +1,213 @@
+{
+  "appgroup_id": "6899d0e88548de6f4e3e1b5a",
+  "appgroup_name": "Yoga Kurs Management",
+  "apps": {
+    "teilnehmeranmeldung": {
+      "app_id": "6899d0d7ab6cda2d36ea30f4",
+      "name": "Teilnehmeranmeldung",
+      "controls": {
+        "teilnehmer_vorname": {
+          "identifier": "teilnehmer_vorname",
+          "label": "Vorname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "teilnehmer_nachname": {
+          "identifier": "teilnehmer_nachname",
+          "label": "Nachname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "teilnehmer_email": {
+          "identifier": "teilnehmer_email",
+          "label": "E-Mail",
+          "type": "string",
+          "subtype": "email",
+          "fulltype": "string/email",
+          "description": "A valid email address (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "angemeldete_kurse": {
+          "identifier": "angemeldete_kurse",
+          "label": "Angemeldete Kurse",
+          "type": "multipleapplookup",
+          "subtype": "select",
+          "fulltype": "multipleapplookup/select",
+          "description": "Arbitrary number of referenced LivingApp records from the target lookup app 'Kursverwaltung' with the id `6899d0d3ca4dc3817f92802b`.\n\nThe field value will be a list of valid record URLs in the form `https://ci04.ci.xist4c.de/rest/apps/6899d0d3ca4dc3817f92802b/<record-id>`.",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true,
+          "lookup_app": "https://ci04.ci.xist4c.de/rest/apps/6899d0d3ca4dc3817f92802b"
+        }
+      }
+    },
+    "kursleiterzuordnung": {
+      "app_id": "6899d0d63370f71550c5aea6",
+      "name": "Kursleiterzuordnung",
+      "controls": {
+        "kursleiter_vorname": {
+          "identifier": "kursleiter_vorname",
+          "label": "Vorname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "kursleiter_nachname": {
+          "identifier": "kursleiter_nachname",
+          "label": "Nachname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "kursleiter_kontakt": {
+          "identifier": "kursleiter_kontakt",
+          "label": "Kontakt",
+          "type": "string",
+          "subtype": "tel",
+          "fulltype": "string/tel",
+          "description": "A valid telephone number. Might include country prefix and should include area code (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "zugewiesener_kurs": {
+          "identifier": "zugewiesener_kurs",
+          "label": "Zugewiesener Kurs",
+          "type": "applookup",
+          "subtype": "select",
+          "fulltype": "applookup/select",
+          "description": "A reference to a LivingApp record from the target lookup app 'Kursverwaltung' with the id `6899d0d3ca4dc3817f92802b` (or `null`/`None`).\n\nThe field value will be a valid record URL in the form `https://ci04.ci.xist4c.de/rest/apps/6899d0d3ca4dc3817f92802b/<record-id>` or `null`/`None`.",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true,
+          "lookup_app": "https://ci04.ci.xist4c.de/rest/apps/6899d0d3ca4dc3817f92802b"
+        }
+      }
+    },
+    "kursverwaltung": {
+      "app_id": "6899d0d3ca4dc3817f92802b",
+      "name": "Kursverwaltung",
+      "controls": {
+        "kurs_name": {
+          "identifier": "kurs_name",
+          "label": "Kursname",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "kurs_beschreibung": {
+          "identifier": "kurs_beschreibung",
+          "label": "Kursbeschreibung",
+          "type": "string",
+          "subtype": "textarea",
+          "fulltype": "string/textarea",
+          "description": "A string value that can contain multiple lines of text (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": true,
+          "in_text": true,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "kurs_zeitplan": {
+          "identifier": "kurs_zeitplan",
+          "label": "Zeitplan",
+          "type": "date",
+          "subtype": "datetimeminute",
+          "fulltype": "date/datetimeminute",
+          "description": "A specific moment in time consisting of year, month, day, hour and minute. (Or `null`/`None`)\n\nThe field value will be a string in the format `<YYYY>-<MM>-<DD>T<HH>:<MM>` or `null`/`None`.\n\nFor example: `1879-03-14T11:30`.",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        },
+        "kurs_ort": {
+          "identifier": "kurs_ort",
+          "label": "Ort",
+          "type": "string",
+          "subtype": "text",
+          "fulltype": "string/text",
+          "description": "A string value not longer than 4000 characters (or `null`/`None`).",
+          "required": null,
+          "in_list": true,
+          "in_mobile_list": false,
+          "in_text": false,
+          "in_structured_search": false,
+          "in_fulltext_search": null,
+          "in_expert_search": true
+        }
+      }
+    }
+  },
+  "metadata": {
+    "apps_list": [
+      "Teilnehmeranmeldung",
+      "Kursleiterzuordnung",
+      "Kursverwaltung"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "content": "Create design_brief.md with full design specification",
+    "status": "completed",
+    "activeForm": "Creating design_brief.md"
+  },
+  {
+    "content": "Update index.html with font and lang",
+    "status": "completed",
+    "activeForm": "Updating index.html"
+  },
+  {
+    "content": "Update src/index.css with theme CSS variables",
+    "status": "completed",
+    "activeForm": "Updating CSS variables"
+  },
+  {
+    "content": "Fix sonner.tsx to work without next-themes",
+    "status": "completed",
+    "activeForm": "Fixing sonner component"
+  },
+  {
+    "content": "Implement Dashboard.tsx following design_brief.md",
+    "status": "completed",
+    "activeForm": "Implementing Dashboard.tsx"
+  },
+  {
+    "content": "Build and verify no TypeScript errors",
+    "status": "completed",
+    "activeForm": "Building and verifying"
+  },
+  {
+    "content": "Deploy to GitHub",
+    "status": "in_progress",
+    "activeForm": "Deploying to GitHub"
+  }
+]
